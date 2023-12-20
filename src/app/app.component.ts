@@ -13,7 +13,13 @@ export class AppComponent {
     new WishItem('Get Coffee', true),
     new WishItem('Find grass that cuts itself'),
   ];
-
+  newWishItem = '';
+  addNewWish() {
+    // add wish to items array
+    this.items.push(new WishItem(this.newWishItem));
+    // clear the textbox
+    this.newWishItem = '';
+  }
   toggleItem(item: WishItem) {
     item.isCompleted = !item.isCompleted;
     console.log(item);
