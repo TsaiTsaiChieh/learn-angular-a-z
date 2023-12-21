@@ -16,7 +16,17 @@ export class AppComponent {
 
   listFilter: string = '0';
   newWishItem = '';
-  visibleItems: WishItem[] = this.items;
+
+  get visibleItems(): WishItem[] {
+    let value = this.listFilter;
+    if (value === '0') {
+      return this.items;
+    } else if (value === '1') {
+      return this.items.filter((ele) => !ele.isCompleted);
+    } else {
+      return this.items.filter((ele) => ele.isCompleted);
+    }
+  }
 
   addNewWish() {
     // add wish to items array
@@ -25,16 +35,16 @@ export class AppComponent {
     this.newWishItem = '';
   }
 
-  filterChange(value: any) {
-    console.log(value);
-    if (value === '0') {
-      this.visibleItems = this.items;
-    } else if (value === '1') {
-      this.visibleItems = this.items.filter((ele) => !ele.isCompleted);
-    } else if (value === '2') {
-      this.visibleItems = this.items.filter((ele) => ele.isCompleted);
-    }
-  }
+  // filterChange(value: any) {
+  //   console.log(value);
+  //   if (value === '0') {
+  //     this.visibleItems = this.items;
+  //   } else if (value === '1') {
+  //     this.visibleItems = this.items.filter((ele) => !ele.isCompleted);
+  //   } else if (value === '2') {
+  //     this.visibleItems = this.items.filter((ele) => ele.isCompleted);
+  //   }
+  // }
 
   toggleItem(item: WishItem) {
     item.isCompleted = !item.isCompleted;
