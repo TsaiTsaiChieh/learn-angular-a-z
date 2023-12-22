@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import { WishItem } from './shared/models/wishItem';
 
+const filters = [
+  (item: WishItem) => item,
+  (item: WishItem) => !item.isCompleted,
+  (item: WishItem) => item.isCompleted,
+];
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -14,18 +19,11 @@ export class AppComponent {
     new WishItem('Find grass that cuts itself'),
   ];
 
-  listFilter: string = '0';
+  listFilter: any = '0';
   newWishItem = '';
 
   get visibleItems(): WishItem[] {
-    let value = this.listFilter;
-    if (value === '0') {
-      return this.items;
-    } else if (value === '1') {
-      return this.items.filter((ele) => !ele.isCompleted);
-    } else {
-      return this.items.filter((ele) => ele.isCompleted);
-    }
+    return this.items.filter(filters[this.listFilter]);
   }
 
   addNewWish() {
@@ -34,17 +32,6 @@ export class AppComponent {
     // clear the textbox
     this.newWishItem = '';
   }
-
-  // filterChange(value: any) {
-  //   console.log(value);
-  //   if (value === '0') {
-  //     this.visibleItems = this.items;
-  //   } else if (value === '1') {
-  //     this.visibleItems = this.items.filter((ele) => !ele.isCompleted);
-  //   } else if (value === '2') {
-  //     this.visibleItems = this.items.filter((ele) => ele.isCompleted);
-  //   }
-  // }
 
   toggleItem(item: WishItem) {
     item.isCompleted = !item.isCompleted;
