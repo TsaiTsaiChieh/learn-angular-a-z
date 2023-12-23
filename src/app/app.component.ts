@@ -32,9 +32,4 @@ export class AppComponent {
     // clear the textbox
     this.newWishItem = '';
   }
-
-  toggleItem(item: WishItem) {
-    item.isCompleted = !item.isCompleted;
-    console.log(item);
-  }
 }
