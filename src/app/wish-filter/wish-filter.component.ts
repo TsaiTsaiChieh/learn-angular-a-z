@@ -12,18 +12,19 @@ const filters = [
   styleUrls: ['./wish-filter.component.css'],
 })
 export class WishFilterComponent implements OnInit {
-  @Input() items: WishItem[] = [];
-  @Output() filter = new EventEmitter<any>();
+  @Input() filter: any;
+  @Output() filterChange = new EventEmitter<any>();
 
   listFilter: any = '0';
 
   constructor() {}
 
   ngOnInit(): void {
-    this.filter.emit(filters[0]);
+    this.updateFilter('0');
   }
 
-  changeFilter(value: any) {
-    this.filter.emit(filters[this.listFilter]);
+  updateFilter(value: any) {
+    this.filter = filters[value];
+    this.filterChange.emit(this.filter);
   }
 }
