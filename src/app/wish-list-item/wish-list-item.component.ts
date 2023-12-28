@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-
+import events from '../shared/services/EventService';
 @Component({
   selector: 'wish-list-item',
   templateUrl: './wish-list-item.component.html',
@@ -19,5 +19,9 @@ export class WishListItemComponent implements OnInit {
   toggleFulfilled() {
     this.fulfilled = !this.fulfilled;
     this.fulfilledChange.emit(this.fulfilled);
+  }
+
+  removeWish() {
+    events.emit('removeWish', this.wishText);
   }
 }
