@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { EventService } from '../../shared/services/EventService';
-import { WishItem } from '../../shared/models/wishItem';
+import { Component, OnInit, Input } from '@angular/core';
+import { WishItem } from 'src/app/shared/models/wishItem';
+import { EventService } from 'src/app/shared/services/EventService';
+
 @Component({
   selector: 'wish-list-item',
   templateUrl: './wish-list-item.component.html',
@@ -8,8 +9,7 @@ import { WishItem } from '../../shared/models/wishItem';
 })
 export class WishListItemComponent implements OnInit {
   @Input() wish!: WishItem;
-  // @Input() fulfilled!: boolean;
-  // @Output() fulfilledChange = new EventEmitter<boolean>();
+
   get cssClass() {
     return {
       strikeout: this.wish.isCompleted,
@@ -20,11 +20,11 @@ export class WishListItemComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  toggleFulfilled() {
-    this.wish.isCompleted = !this.wish.isCompleted;
-  }
-
   removeWish() {
     this.events.emit('removeWish', this.wish);
+  }
+
+  toggleFulfilled() {
+    this.wish.isCompleted = !this.wish.isCompleted;
   }
 }

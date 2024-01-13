@@ -8,26 +8,7 @@ import { WishService } from './wish/wish.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  title = 'wishlist';
-  items!: WishItem[];
+  constructor() {}
 
-  constructor(private events: EventService, private wishService: WishService) {
-    this.events.listen('removeWish', (wish: any) => {
-      // todo remove wish from items
-      let index = this.items.indexOf(wish);
-      this.items.splice(index, 1);
-    });
-  }
-  filter: any;
-
-  ngOnInit() {
-    this.wishService.getWishes().subscribe(
-      (data: any) => {
-        this.items = data;
-      },
-      (error: any) => {
-        alert(error.message);
-      }
-    );
-  }
+  ngOnInit() {}
 }
