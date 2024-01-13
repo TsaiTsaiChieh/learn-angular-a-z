@@ -8,7 +8,7 @@ import { WishItem } from '../../shared/models/wishItem';
 })
 export class AddWishFormComponent implements OnInit {
   @Output() addWish = new EventEmitter<WishItem>();
-  @Input() items: WishItem[] = [];
+  newWishText = '';
   constructor() {}
 
   ngOnInit(): void {}
@@ -16,7 +16,7 @@ export class AddWishFormComponent implements OnInit {
 
   addNewWish() {
     // add wish to items array
-    this.items.push(new WishItem(this.newWishItem));
+    this.addWish.emit(new WishItem(this.newWishText));
     // clear the textbox
     this.newWishItem = '';
   }
