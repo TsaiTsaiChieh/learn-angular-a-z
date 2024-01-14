@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -11,13 +11,16 @@ export class ContactComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  senderNameControl = new FormControl('');
-  senderEmailControl = new FormControl('');
-  senderMessageControl = new FormControl('');
+  contactForm = new FormGroup({
+    senderName: new FormControl('', Validators.required),
+    senderEmail: new FormControl('', [Validators.required, Validators.email]),
+    senderMessage: new FormControl('', [
+      Validators.required,
+      Validators.minLength(10),
+    ]),
+  });
 
   submitForm() {
-    if (this.senderNameControl.dirty) {
-      alert('you updated the name field');
-    }
+    console.log(this.contactForm.valid);
   }
 }
