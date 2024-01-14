@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { invalidEmailDomain } from './invalidEmailDomain';
-
+import { createInvalidEmailDomain } from './invalidEmailDomain';
+const invalidEmailDomain = createInvalidEmailDomain([
+  'outlook.com',
+  'yahoo.com',
+]);
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
